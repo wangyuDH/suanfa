@@ -1,9 +1,15 @@
 package lianbiao;
 
+import com.sun.corba.se.impl.encoding.CodeSetConversion;
+
 /**
  *                 7
  *            ↙        ↖
  * 1 -> 2 -> 3 -> 4 -> 5 ->6
+ *
+ *  1 判断是否有环
+ *  2 有环的话求相遇点
+ *  3 有环的话求环的入口
  */
 public class Test {
 
@@ -11,16 +17,20 @@ public class Test {
         Node head = buildNodeList();
 
         boolean loop1 = loop1(head);
-        System.out.println("loop1: "+ loop1);
+        System.out.println("loop12: "+ loop1);
+        System.out.println("=====================================");
 
         boolean loop2 = loop2(head);
-        System.out.println("loop2: "+ loop2);
+        System.out.println("loop13: "+ loop2);
+        System.out.println("=====================================");
 
         boolean loop3 = loop3(head);
-        System.out.println("loop3: "+ loop3);
+        System.out.println("loop14: "+ loop3);
+        System.out.println("=====================================");
 
         boolean loop4 = loop4(head);
-        System.out.println("loop4: "+ loop4);
+        System.out.println("loop15: "+ loop4);
+        System.out.println("=====================================");
     }
 
     private static boolean loop1(Node head) {
@@ -37,7 +47,17 @@ public class Test {
             fast = fast.next.next;
             c1++;
             if(slow == fast){
-                System.out.println("current node: "+ slow +",step12: "+c1);
+                System.out.println("相遇点node: "+ slow +",step12: "+c1);
+                Node temp = guard;
+
+                while (true){
+                    fast = fast.next;
+                    temp = temp.next;
+                    if(fast == temp){
+                        System.out.println("环的起点node: "+ fast);
+                        break;
+                    }
+                }
                 return true;
             }
         }
@@ -131,11 +151,11 @@ public class Test {
 
         n5.next = n6;
 
-        n6.next = head;
+        n6.next = n7;
 
-        n7.next = n8;
+        n7.next = head;
 
-        n8.next = head;
+        //n8.next = head;
 
         return head;
     }
