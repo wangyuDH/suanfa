@@ -11,7 +11,7 @@ import com.sun.corba.se.impl.encoding.CodeSetConversion;
  *  2 有环的话求相遇点
  *  3 有环的话求环的入口
  */
-public class Test {
+public class Test01 {
 
     public static void main(String[] args) {
         Node head = buildNodeList();
