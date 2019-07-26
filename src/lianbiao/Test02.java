@@ -1,9 +1,9 @@
 package lianbiao;
 
 /**
- *     判断回环字符串
- *      1 2 3 4 3 2 1
+ *   1 2 3 4 3 2 1
  *
+ *   判断回环字符串
  */
 public class Test02 {
 
@@ -24,22 +24,20 @@ public class Test02 {
         Node guard = new Node(head);
         Node slow = guard;
         Node fast = guard;
-        //链表反转的头指针
         Node reverseHead = null;
         while (fast != null && fast.next != null){
             fast = fast.next.next;
-
             Node temp = slow.next;
 
             slow.next = reverseHead;
             reverseHead = slow;
             slow = temp;
         }
-
-        //fast=null,代表奇数,前进 一个指针
-        if(fast == null){
+        //奇数
+        if (fast == null){
             slow = slow.next;
         }
+
         while (slow != null){
             if(slow.data != reverseHead.data){
                 return false;
@@ -69,8 +67,8 @@ public class Test02 {
         Node n5 = new Node(3);
         Node n6 = new Node(2);
 
-        //Node n7 = new Node(1);
-        Node n7 = new Node(7);
+        Node n7 = new Node(1);
+        //Node n7 = new Node(7);
 
         head.next = n2;
 
