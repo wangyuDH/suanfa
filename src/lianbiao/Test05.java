@@ -16,16 +16,37 @@ public class Test05 {
         Node head2 = buildNodeList2();
         printLink(head2);
 
+        //非递归
         Node head = merge(head1,head2);
         printLink(head);
 
+        //递归
+        Node recursionHead = recursionMerge(head1,head2);
+        printLink(recursionHead);
+    }
+
+    private static Node recursionMerge(Node head1, Node head2) {
+        if(head1 == null && head2 == null){
+            return null;
+        }
+        if(head1 == null){
+            return head2;
+        }
+        if(head2 == null){
+            return head1;
+        }
+
+        return null;
     }
 
     private static Node merge(Node head1, Node head2) {
-        if(head1 == null && head2 != null){
+        if(head1 == null && head2 == null){
+            return null;
+        }
+        if(head1 == null){
             return head2;
         }
-        if(head1 != null && head2 == null){
+        if(head2 == null){
             return head1;
         }
 
