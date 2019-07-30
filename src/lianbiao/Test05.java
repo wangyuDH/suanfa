@@ -1,11 +1,10 @@
 package lianbiao;
 
 /**
- *
- *  1 -> 2 -> 4 -> 9
- *  2 -> 3 -> 5 -> 6 -> 8
- *
- *  合并2个有序链表
+ * 1 -> 2 -> 4 -> 9
+ * 2 -> 3 -> 5 -> 6 -> 8
+ * <p>
+ * 合并2个有序链表
  */
 public class Test05 {
 
@@ -17,36 +16,44 @@ public class Test05 {
         printLink(head2);
 
         //非递归
-        Node head = merge(head1,head2);
+        Node head = merge(head1, head2);
         printLink(head);
 
         //递归
-        Node recursionHead = recursionMerge(head1,head2);
+        Node recursionHead = recursionMerge(head1, head2);
         printLink(recursionHead);
     }
 
     private static Node recursionMerge(Node head1, Node head2) {
-        if(head1 == null && head2 == null){
+        if (head1 == null && head2 == null) {
             return null;
         }
-        if(head1 == null){
+        if (head1 == null) {
             return head2;
         }
-        if(head2 == null){
+        if (head2 == null) {
             return head1;
         }
+        Node newHead = null;
+        if (head1.data <= head2.data) {
+            newHead = head1;
+            newHead.next = recursionMerge(head1.next, head2);
+        } else {
+            newHead = head2;
+            newHead.next = recursionMerge(head1, head2.next);
+        }
 
-        return null;
+        return newHead;
     }
 
     private static Node merge(Node head1, Node head2) {
-        if(head1 == null && head2 == null){
+        if (head1 == null && head2 == null) {
             return null;
         }
-        if(head1 == null){
+        if (head1 == null) {
             return head2;
         }
-        if(head2 == null){
+        if (head2 == null) {
             return head1;
         }
 
@@ -55,21 +62,21 @@ public class Test05 {
         Node head = null;
         Node tail = null;
         //新链表的头指针
-        if(p1.data <= p2.data){
+        if (p1.data <= p2.data) {
             head = new Node(p1.data);
             p1 = p1.next;
-        }else {
+        } else {
             head = new Node(p2.data);
             p2 = p2.next;
         }
         tail = head;
 
         Node temp = null;
-        while (p1 != null && p2 != null){
-            if(p1.data <= p2.data){
+        while (p1 != null && p2 != null) {
+            if (p1.data <= p2.data) {
                 temp = new Node(p1.data);
                 p1 = p1.next;
-            }else {
+            } else {
                 temp = new Node(p2.data);
                 p2 = p2.next;
             }
@@ -77,11 +84,11 @@ public class Test05 {
             tail = temp;
         }
 
-        if(p1 == null){
-            tail.next = p2.next;
+        if (p1 == null) {
+            tail.next = p2;
         }
-        if(p2 == null){
-            tail.next = p1.next;
+        if (p2 == null) {
+            tail.next = p1;
         }
 
         return head;
@@ -89,8 +96,8 @@ public class Test05 {
 
     private static void printLink(Node head) {
         Node temp = head;
-        while (temp != null){
-            System.out.print(temp+",");
+        while (temp != null) {
+            System.out.print(temp + ",");
             temp = temp.next;
         }
         System.out.println();
