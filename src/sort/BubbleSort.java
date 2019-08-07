@@ -13,16 +13,25 @@ public class BubbleSort {
     public static void main(String[] args) {
         int array1[] = getRandom();
         int array2[] = array1.clone();
+        int array3[] = array1.clone();
 
         printArray(array1);
+        System.out.println("======================================================================================");
+
         bubbleSort(array1);
         printArray(array1);
 
         System.out.println("======================================================================================");
 
-        printArray(array2);
+        //printArray(array2);
         cccSort(array2);
         printArray(array2);
+
+        System.out.println("======================================================================================");
+
+        //printArray(array3);
+        selectSort(array3);
+        printArray(array3);
     }
 
     private static void bubbleSort(int[] a) {
@@ -49,7 +58,7 @@ public class BubbleSort {
         long start =System.currentTimeMillis();
         int temp;
         for (int i = 0; i < a.length - 1; i++) {
-            for (int j = i+1; j < a.length - 1; j++) {
+            for (int j = i+1; j < a.length ; j++) {
                 if (a[i] > a[j]) {
                     temp = a[j];
                     a[j] = a[i];
@@ -60,6 +69,23 @@ public class BubbleSort {
         System.out.println("cccSort sort: " + (System.currentTimeMillis() - start));
     }
 
+    private static void selectSort(int[] a) {
+        long start =System.currentTimeMillis();
+        for (int i = 0; i < a.length - 1; i++) {
+            int index = i;
+            for (int j = i+1; j < a.length; j++) {
+                if (a[j] < a[index]) {
+                    index = j;
+                }
+            }
+            if(index != i){
+                int temp = a[index];
+                a[index] = a[i];
+                a[i] = temp;
+            }
+        }
+        System.out.println("selectSort sort: " + (System.currentTimeMillis() - start));
+    }
 
     private static int[] getRandom() {
         int[] array = new int[SIZE];
