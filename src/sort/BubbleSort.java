@@ -14,6 +14,7 @@ public class BubbleSort {
         int array1[] = getRandom();
         int array2[] = array1.clone();
         int array3[] = array1.clone();
+        int array4[] = array1.clone();
 
         printArray(array1);
         System.out.println("======================================================================================");
@@ -32,6 +33,12 @@ public class BubbleSort {
         //printArray(array3);
         selectSort(array3);
         printArray(array3);
+
+        System.out.println("======================================================================================");
+
+        //printArray(array3);
+        insertSort(array4);
+        printArray(array4);
     }
 
     private static void bubbleSort(int[] a) {
@@ -85,6 +92,23 @@ public class BubbleSort {
             }
         }
         System.out.println("selectSort sort: " + (System.currentTimeMillis() - start));
+    }
+
+    private static void insertSort(int[] a) {
+        long start =System.currentTimeMillis();
+        for (int i = 0; i < a.length; i++) {
+            int temp = a[i];
+            int j = i - 1;
+            for(;j>=0;j--){
+                if(temp < a[j]){
+                    a[j+1] = a[j];
+                }else {
+                    break;
+                }
+            }
+            a[j+1] = temp;
+        }
+        System.out.println("insertSort sort: " + (System.currentTimeMillis() - start));
     }
 
     private static int[] getRandom() {
