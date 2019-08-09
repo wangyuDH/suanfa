@@ -4,6 +4,8 @@ import java.util.Random;
 
 /**
  * 冒泡排序
+ * 选择排序
+ * 插入排序
  * 4,2,5,6,1,9,7
  */
 public class BubbleSort {
