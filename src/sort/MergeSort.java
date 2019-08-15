@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class MergeSort {
 
-    private static final int SIZE = 5000;
+    private static final int SIZE = 50;
 
     public static void main(String[] args) {
         int array1[] = getRandom();
@@ -24,7 +24,9 @@ public class MergeSort {
 
         System.out.println("======================================================================================");
 
-        quickSort(array2);
+        long start2 = System.currentTimeMillis();
+        fastSort(array2, 0, array2.length - 1);
+        System.out.println("fast sort: " + (System.currentTimeMillis() - start2));
         printArray(array2);
     }
 
@@ -60,16 +62,42 @@ public class MergeSort {
             tmpArray[index++] = a[j++];
         }
 
-        for (int k = 0; k <q - p + 1; k++) {
+        for (int k = 0; k < q - p + 1; k++) {
             a[p + k] = tmpArray[k];
         }
 
     }
 
-    private static void quickSort(int[] a) {
-        long start = System.currentTimeMillis();
+    private static void fastSort(int[] a, int p, int q) {
+        if (p >= q) {
+            return;
+        }
+        int r = partion(a, p, q);
 
-        System.out.println("quick sort: " + (System.currentTimeMillis() - start));
+        fastSort(a, p, r - 1);
+        fastSort(a, r + 1, q);
+    }
+
+    private static int partion(int[] a, int p, int q) {
+        int pivot = a[q];
+
+        int temp;
+        int i = p;
+        int j = p;
+        for (; j <= q - 1; j++) {
+            if (a[j] < pivot) {
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+                i++;
+            }
+        }
+
+        temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+
+        return i;
     }
 
     private static int[] getRandom() {
