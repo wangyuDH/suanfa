@@ -1,11 +1,9 @@
 package sort;
 
-import org.omg.PortableInterceptor.INACTIVE;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * 桶排序
@@ -57,32 +55,53 @@ public class BucketSort {
 
     private static void bucketSort(int[] a) {
         long start = System.currentTimeMillis();
-        //计算桶的个数
+        //计算数组中的最大最小值
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
-
-
-        List<LinkedList<Integer>> bucket = new ArrayList<>();
+        for (int i = 0; i < a.length; i++) {
+            min = Math.min(min, a[i]);
+            max = Math.max(max, a[i]);
+        }
+        //计算桶的个数
+        int bucketSize = (max - min + 1) / a.length;
+        //初始化桶
+        List<LinkedList<Integer>> bucket = new ArrayList<>(bucketSize);
         //将元素放个桶中
-        for(int i=0;i<a.length;i++){
-            int index = getBucketIndex(a[i]);
-            bucket.get(index).add(a[i]);
+        List<Integer> list = null;
+        for (int i = 0; i < a.length; i++) {
+            int index = getBucketIndex(a[i], min, bucketSize);
+            list = bucket.get(index);
+            if(list == null){
+                list = new LinkedList<>();
+            }
+            list.add(a[i]);
         }
         //排序每个桶中的数据
+        for(int i=0;i<bucketSize;i++){
+            Collections.sort(bucket.get(i));
+        }
 
-
+        int index = 0;
+        for(int i=0;i<bucketSize;i++){
+            list = bucket.get(i);
+            if(list == null || list.size() == 0){
+                continue;
+            }
+            for(int j =0;j<list.size();j++){
+                a[index++] = list.get(j);
+            }
+        }
         System.out.println("bucket sort: " + (System.currentTimeMillis() - start));
     }
 
     /**
      * 获取元素在哪个桶
+     *
      * @param data
      * @return index
      */
-    private static int getBucketIndex(int data) {
-        int index = 0;
-
-        return index;
+    private static int getBucketIndex(int data, int min, int bucketSize) {
+        return (data - min) / bucketSize;
     }
 
     private static void radixSort(int[] a) {
