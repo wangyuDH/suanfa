@@ -29,8 +29,8 @@ public class BucketSort {
 
         System.out.println("======================================================================================");
 
-        radixSort(array3);
-        printArray(array3);
+        //radixSort(array3);
+        //printArray(array3);
 
     }
 
@@ -63,22 +63,22 @@ public class BucketSort {
             max = Math.max(max, a[i]);
         }
         //计算桶的个数
-        int bucketSize = (max - min + 1) / a.length;
+        int bucketSize = (max - min ) / a.length + 1;
         //初始化桶
-        List<LinkedList<Integer>> bucket = new ArrayList<>(bucketSize);
+        List<List<Integer>> bucket = new ArrayList<>(bucketSize);
+        for(int i = 0; i < bucketSize; i++){
+            bucket.add(new ArrayList<>());
+        }
         //将元素放个桶中
         List<Integer> list = null;
         for (int i = 0; i < a.length; i++) {
-            int index = getBucketIndex(a[i], min, bucketSize);
-            list = bucket.get(index);
-            if(list == null){
-                list = new LinkedList<>();
-            }
-            list.add(a[i]);
+            int index = getBucketIndex(a[i], min, a.length);
+            bucket.get(index).add(a[i]);
         }
         //排序每个桶中的数据
         for(int i=0;i<bucketSize;i++){
             Collections.sort(bucket.get(i));
+            System.out.println("bucket i:" + i + ": "+ bucket.get(i));
         }
 
         int index = 0;
@@ -100,8 +100,8 @@ public class BucketSort {
      * @param data
      * @return index
      */
-    private static int getBucketIndex(int data, int min, int bucketSize) {
-        return (data - min) / bucketSize;
+    private static int getBucketIndex(int data, int min, int arraySize) {
+        return (data - min)/ arraySize;
     }
 
     private static void radixSort(int[] a) {
