@@ -62,11 +62,12 @@ public class BucketSort {
             min = Math.min(min, a[i]);
             max = Math.max(max, a[i]);
         }
+        System.out.println("array size: " + a.length + ",min: " + min + ",max: " + max);
         //计算桶的个数
-        int bucketSize = (max - min ) / a.length + 1;
+        int bucketSize = (max - min) / a.length + 1;
         //初始化桶
         List<List<Integer>> bucket = new ArrayList<>(bucketSize);
-        for(int i = 0; i < bucketSize; i++){
+        for (int i = 0; i < bucketSize; i++) {
             bucket.add(new ArrayList<>());
         }
         //将元素放个桶中
@@ -76,18 +77,18 @@ public class BucketSort {
             bucket.get(index).add(a[i]);
         }
         //排序每个桶中的数据
-        for(int i=0;i<bucketSize;i++){
+        for (int i = 0; i < bucketSize; i++) {
             Collections.sort(bucket.get(i));
-            System.out.println("bucket i:" + i + ": "+ bucket.get(i));
+            System.out.println("bucket i:" + i + ": " + bucket.get(i));
         }
 
         int index = 0;
-        for(int i=0;i<bucketSize;i++){
+        for (int i = 0; i < bucketSize; i++) {
             list = bucket.get(i);
-            if(list == null || list.size() == 0){
+            if (list == null || list.size() == 0) {
                 continue;
             }
-            for(int j =0;j<list.size();j++){
+            for (int j = 0; j < list.size(); j++) {
                 a[index++] = list.get(j);
             }
         }
@@ -101,7 +102,7 @@ public class BucketSort {
      * @return index
      */
     private static int getBucketIndex(int data, int min, int arraySize) {
-        return (data - min)/ arraySize;
+        return (data - min) / arraySize;
     }
 
     private static void radixSort(int[] a) {
