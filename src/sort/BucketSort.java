@@ -19,11 +19,13 @@ public class BucketSort {
 
         System.out.println("======================================================================================");
 
+        printArray(array1);
         countingSort(array1);
         printArray(array1);
 
         System.out.println("======================================================================================");
 
+        printArray(array2);
         bucketSort(array2);
         printArray(array2);
 
@@ -36,18 +38,52 @@ public class BucketSort {
 
     private static void countingSort(int[] a) {
         long start = System.currentTimeMillis();
-        int bucket[] = new int[11];
+        // 查找数组中数据的范围
+        int max = a[0];
+        for (int i = 1; i < a.length; ++i) {
+            if (max < a[i]) {
+                max = a[i];
+            }
+        }
+        // 申请一个计数数组c，下标大小[0,max]
+        int bucket[] = new int[max + 1];
+
         //将分数相同的放入一个桶中
         for (int i = 0; i < a.length; i++) {
             bucket[a[i]]++;
         }
 
+/*
+        // 第一种方式
         int index = 0;
         for (int i = 0; i < bucket.length; i++) {
             while (bucket[i] > 0) {
                 a[index++] = i;
                 bucket[i]--;
             }
+        }
+*/
+
+        /**
+         * 第二种方式
+         */
+
+        // 依次累加
+        for (int i = 1; i < bucket.length; i++) {
+            bucket[i] = bucket[i] + bucket[i - 1];
+        }
+
+        // 临时数组r，存储排序之后的结果
+        int[] temp = new int[a.length];
+
+        for (int i = 0; i < a.length; i++) {
+            int index = --bucket[a[i]];
+            temp[index] = a[i];
+        }
+
+        // 将结果拷贝给a数组
+        for (int i = 0; i < a.length; ++i) {
+            a[i] = temp[i];
         }
 
         System.out.println("counting sort: " + (System.currentTimeMillis() - start));
@@ -73,6 +109,7 @@ public class BucketSort {
         //将元素放个桶中
         List<Integer> list = null;
         for (int i = 0; i < a.length; i++) {
+            //计算每个元素所处的桶下标
             int index = getBucketIndex(a[i], min, a.length);
             bucket.get(index).add(a[i]);
         }
