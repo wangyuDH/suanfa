@@ -2,6 +2,10 @@ package find;
 
 /**
  * 折半查找-基础版
+ *   注意点：
+ *    1 退出条件
+ *    2 mid的取值
+ *    3 low和hign的更新
  */
 public class BSearchTest01 {
     public static final int key = 10;
