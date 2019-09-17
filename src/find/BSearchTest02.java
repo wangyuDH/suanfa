@@ -12,9 +12,9 @@ import java.io.Serializable;
  */
 public class BSearchTest02 {
     public static final int key = 9;
+    public static final int array[] = {2, 5, 7, 8, 10, 33, 57};
 
     public static void main(String[] args) {
-        int array[] = {2, 5, 7, 8, 8, 8, 10, 33, 57};
         int low = 0;
         int high = array.length - 1;
 
@@ -102,7 +102,7 @@ public class BSearchTest02 {
         while (high >= low) {
             int mid = low + (high - low) / 2;
             if (a[mid] <= key) {
-                if (mid == a.length-1 || a[mid+1] > key) {
+                if (mid == a.length - 1 || a[mid + 1] > key) {
                     return mid;
                 } else {
                     low = mid + 1;
