@@ -6,7 +6,7 @@ import java.util.Random;
  * 归并排序 VS 快速排序
  * 4,2,5,6,1,9,7
  */
-public class MergeSort {
+public class MergeAndFastSort {
 
     private static final int SIZE = 50;
 
