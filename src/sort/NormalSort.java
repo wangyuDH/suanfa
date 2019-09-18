@@ -6,10 +6,9 @@ import java.util.Random;
  * 冒泡排序
  * 选择排序
  * 插入排序
- * 归并排序
  * 4,2,5,6,1,9,7
  */
-public class BubbleSort {
+public class NormalSort {
 
     private static final int SIZE = 5000;
 
@@ -18,7 +17,6 @@ public class BubbleSort {
         int array2[] = array1.clone();
         int array3[] = array1.clone();
         int array4[] = array1.clone();
-        int array5[] = array1.clone();
 
         printArray(array1);
         System.out.println("======================================================================================");
@@ -44,11 +42,6 @@ public class BubbleSort {
         insertSort(array4);
         printArray(array4);
 
-        //printArray(array3);
-        long start1 = System.currentTimeMillis();
-        mergeSort(array5,0, array1.length - 1);
-        System.out.println("merge sort: " + (System.currentTimeMillis() - start1));
-        printArray(array5);
     }
 
     private static void bubbleSort(int[] a) {
@@ -119,44 +112,6 @@ public class BubbleSort {
             a[j+1] = temp;
         }
         System.out.println("insertSort sort: " + (System.currentTimeMillis() - start));
-    }
-
-    private static void mergeSort(int[] a, int p, int q) {
-        if (p >= q) {
-            return;
-        }
-        int r = (p + q) / 2;
-
-        mergeSort(a, p, r);
-        mergeSort(a, r + 1, q);
-        merge(a, p, r, q);
-    }
-
-    private static void merge(int[] a, int p, int r, int q) {
-        int tmpArray[] = new int[q - p + 1];
-        int i = p;
-        int j = r + 1;
-        int index = 0;
-        while (i <= r && j <= q) {
-            if (a[i] < a[j]) {
-                tmpArray[index++] = a[i++];
-            } else {
-                tmpArray[index++] = a[j++];
-            }
-        }
-
-        while (i <= r) {
-            tmpArray[index++] = a[i++];
-        }
-
-        while (j <= q) {
-            tmpArray[index++] = a[j++];
-        }
-
-        for (int k = 0; k <q - p + 1; k++) {
-            a[p + k] = tmpArray[k];
-        }
-
     }
 
     private static int[] getRandom() {
