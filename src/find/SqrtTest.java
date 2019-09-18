@@ -12,7 +12,7 @@ public class SqrtTest {
         double low = 0;
         double high = key;
         double result = calc(key, low, high);
-        System.out.println("result: " + result);
+        System.out.println(result);
 
         System.out.println(Math.sqrt(key));
     }
