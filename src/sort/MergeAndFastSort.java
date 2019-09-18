@@ -72,13 +72,13 @@ public class MergeAndFastSort {
         if (p >= q) {
             return;
         }
-        int r = partion(a, p, q);
+        int r = partition(a, p, q);
 
         fastSort(a, p, r - 1);
         fastSort(a, r + 1, q);
     }
 
-    private static int partion(int[] a, int p, int q) {
+    private static int partition(int[] a, int p, int q) {
         int pivot = a[q];
 
         int temp;
