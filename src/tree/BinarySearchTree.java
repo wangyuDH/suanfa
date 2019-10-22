@@ -11,9 +11,8 @@ package tree;
 public class BinarySearchTree {
 
     public static void main(String[] args) {
+        //构建二叉查找数树
         Node root = new Node(10);
-
-        //新增二叉查找数树
         buildTree(root,new Node(8));
         buildTree(root,new Node(14));
         buildTree(root,new Node(13));
@@ -23,19 +22,20 @@ public class BinarySearchTree {
         buildTree(root,new Node(9));
         buildTree(root,new Node(15));
         buildTree(root,new Node(17));
+
         //中序遍历
         midPrint(root);
         System.out.println();
 
         //删除
         remove(root,3);
-        //中序遍历
         midPrint(root);
+        System.out.println();
 
         //删除
-        remove(root,11);
-        //中序遍历
+        remove(root,13);
         midPrint(root);
+        System.out.println();
 
     }
 
@@ -55,24 +55,40 @@ public class BinarySearchTree {
             return;
         }
 
-        // 要删除的节点有两个子节点
+        // 1 要删除的节点有两个子节点
         if(p.left != null && p.right != null){
+            Node right = p.right;
+
+            Node min = right;
+            Node rightMinLeftP = p;
+
+            while (right.left != null){
+                min = right.left;
+                rightMinLeftP = right;
+
+                right = right.left;
+            }
+
+            
 
         }
-        // 删除节点是仅有一个子节点
-        Node child = null;
-        if(p.left == p){
+
+        // 2 删除的节点没有子节点或者仅有一个子节点
+        Node child;
+        if(p.left != null){
             child = p.left;
-        }else{
+        }else if(p.right != null){
             child = p.right;
+        }else {
+            child = null;
         }
 
-
-        // 删除的节点没有子节点
-        if(pp.left == p){
-            pp.left = null;
-        }else{
-            pp.right = null;
+        if(pp == null){
+            root = child;//删除根节点
+        } else if(pp.left == p){
+            pp.left = child;
+        }else {
+            pp.right = child;
         }
 
     }

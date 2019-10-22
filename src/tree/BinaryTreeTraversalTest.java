@@ -10,7 +10,7 @@ package tree;
  * 中序: print() = print(c.left)+print(c)+print(c.right)
  * 后序: print() = print(c.left)+print(c.right)+print(c)
  */
-public class BinaryTree {
+public class BinaryTreeTraversalTest {
     public static void main(String[] args) {
         Node root = buildTree();
 
