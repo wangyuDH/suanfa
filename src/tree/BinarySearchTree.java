@@ -1,5 +1,7 @@
 package tree;
 
+import java.lang.management.PlatformLoggingMXBean;
+
 /**
  *               10
  *           8      14
@@ -27,6 +29,9 @@ public class BinarySearchTree {
         midPrint(root);
         System.out.println();
 
+        //查找
+        findNode(root,100);
+
         //删除
         remove(root,3);
         midPrint(root);
@@ -37,6 +42,21 @@ public class BinarySearchTree {
         midPrint(root);
         System.out.println();
 
+    }
+
+    private static void findNode(Node root,int data) {
+        Node p = root;
+        while (p != null){
+            if(p.data == data){
+                System.out.println(data + " exist...");
+                return;
+            }else if(p.data > data){
+                p = p.left;
+            }else {
+                p = p.right;
+            }
+        }
+        System.out.println(data + " not exist...");
     }
 
     private static void remove(Node root, int data) {
