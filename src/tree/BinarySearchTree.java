@@ -3,9 +3,9 @@ package tree;
 /**
  *               10
  *           8      14
- *        3  9    13   16
- *              11   15 17
- *                        99
+ *        3  9    13     16
+ *              11     15 17
+ *
  *        二叉查找数
  */
 public class BinarySearchTree {
@@ -33,7 +33,7 @@ public class BinarySearchTree {
         System.out.println();
 
         //删除
-        remove(root,13);
+        remove(root,16);
         midPrint(root);
         System.out.println();
 
@@ -42,38 +42,36 @@ public class BinarySearchTree {
     private static void remove(Node root, int data) {
         Node p = root;
         Node pp = null;
-        while (p != null && p.data != data) {
+        while (p != null && p.data != data){
             pp = p;
-            if(data < p.data){
-                p = p.left;
-            }else {
+            if(data > p.data){
                 p = p.right;
+            }else {
+                p = p.left;
             }
         }
-        //没有找到要删除的节点
+        //没有找到
         if(p == null){
             return;
         }
 
-        // 1 要删除的节点有两个子节点
+        //删除的节点有两个子节点 - 找出删除节点的右子树中的最左节点
         if(p.left != null && p.right != null){
-            Node right = p.right;
-
-            Node min = right;
-            Node rightMinLeftP = p;
-
-            while (right.left != null){
-                min = right.left;
-                rightMinLeftP = right;
-
-                right = right.left;
+            Node minP = p.right;
+            Node minPP = p;
+            while (minP.left != null){
+                minPP = minP;
+                minP = minP.left;
             }
 
-            
+            //替换p和minP的值
+            p.data = minP.data;
+            p = minP;
+            pp = minPP;
 
         }
 
-        // 2 删除的节点没有子节点或者仅有一个子节点
+        //删除的节点只有一个子节点或者没有子节点 - 找出要删除节点的子节点
         Node child;
         if(p.left != null){
             child = p.left;
@@ -83,24 +81,16 @@ public class BinarySearchTree {
             child = null;
         }
 
-        if(pp == null){
-            root = child;//删除根节点
-        } else if(pp.left == p){
+        //删除
+        if(pp == null){//删除的是根节点
+            root = child;
+        }else if(pp.left == p){
             pp.left = child;
         }else {
             pp.right = child;
         }
 
-    }
 
-    private static void midPrint(Node node) {
-        if(node == null){
-            return;
-        }
-
-        midPrint(node.left);
-        System.out.print(node.data + " ");
-        midPrint(node.right);
     }
 
     private static void buildTree(Node root,Node node) {
@@ -120,5 +110,15 @@ public class BinarySearchTree {
                 p = p.right;
             }
         }
+    }
+
+    private static void midPrint(Node node) {
+        if(node == null){
+            return;
+        }
+
+        midPrint(node.left);
+        System.out.print(node.data + " ");
+        midPrint(node.right);
     }
 }
