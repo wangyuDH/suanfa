@@ -68,7 +68,6 @@ public class Heap {
             swap(1,c);
             c--;
             siftDown(1,c);
-            System.out.println(Arrays.toString(a));
         }
     }
 
@@ -84,7 +83,7 @@ public class Heap {
             if (2 * i <= n && a[i] < a[2 * i]) {
                 maxPos = 2 * i;
             }
-            if ((2 * i + 1 <= n) && a[i] < a[2 * i + 1]) {
+            if ((2 * i + 1 <= n) && a[maxPos] < a[2 * i + 1]) {
                 maxPos = 2 * i + 1;
             }
             if (maxPos == i) {
