@@ -1,7 +1,5 @@
 package lianbiao;
 
-import com.sun.corba.se.impl.encoding.CodeSetConversion;
-
 /**
  *                 7
  *            ↙        ↖
@@ -9,7 +7,8 @@ import com.sun.corba.se.impl.encoding.CodeSetConversion;
  *
  *  1 判断是否有环
  *  2 有环的话求相遇点
- *  3 有环的话求环的入口
+ *  3 环的长度
+ *  4 有环的话求环的入口
  */
 public class Test01 {
 
