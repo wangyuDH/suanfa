@@ -5,9 +5,26 @@ public class QueueTest {
     public static void main(String[] args) {
         //普通队列-数组
         arrayQueueTest();
-        System.out.println("===================================");
+        System.out.println("================普通队列===================");
+
         //循环队列-数组
         loopQueueTest();
+        System.out.println("================循环队列===================");
+
+        //栈队列
+        stackQueueTest();
+        System.out.println("================栈队列===================");
+    }
+
+    private static void stackQueueTest() {
+        StackQueue stackQueue = new StackQueue();
+        stackQueue.enqueue(1);
+        stackQueue.enqueue(2);
+        stackQueue.enqueue(3);
+        System.out.println(stackQueue.dequeue());
+        System.out.println(stackQueue.dequeue());
+        stackQueue.enqueue(3);
+        System.out.println(stackQueue.dequeue());
     }
 
     private static void loopQueueTest() {
